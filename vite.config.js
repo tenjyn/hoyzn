@@ -190,7 +190,8 @@ logger.error = (msg, options) => {
 }
 
 export default defineConfig({
-	customLogger: logger,
+        customLogger: logger,
+        base: '/hoyzn/',
 	plugins: [
 		...(isDev ? [inlineEditPlugin(), editModeDevPlugin()] : []),
 		react(),
