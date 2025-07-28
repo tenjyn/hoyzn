@@ -31,17 +31,17 @@ const RecurringTaskItem = ({ task, onUpdate, onDelete, isFixed, totalHoursType, 
     let newHours = parseFloat(e.target.value);
     if (isNaN(newHours)) newHours = 0;
     if (newHours < 0) newHours = 0;
-    
+
     const maxHours = totalHoursType === 'daily' ? 24 : (totalHoursType === 'weekly' ? 168 : 0);
     if (newHours > maxHours && maxHours > 0) newHours = maxHours;
 
     setLocalHours(newHours);
   };
-  
+
   const handleInputBlur = () => {
     onUpdate(task.id, { ...task, hours: localHours });
   };
-  
+
   const handleNameChange = (e) => {
     setTempName(e.target.value);
   };
@@ -49,13 +49,13 @@ const RecurringTaskItem = ({ task, onUpdate, onDelete, isFixed, totalHoursType, 
   const saveNameChange = () => {
     onUpdate(task.id, { ...task, name: tempName });
     setIsEditingName(false);
-    onEditToggle(null); 
+    onEditToggle(null);
   };
 
   const cancelNameChange = () => {
     setTempName(task.name);
     setIsEditingName(false);
-    onEditToggle(null); 
+    onEditToggle(null);
   };
 
   const handleColorChange = (e) => {
@@ -89,16 +89,16 @@ const RecurringTaskItem = ({ task, onUpdate, onDelete, isFixed, totalHoursType, 
         {!isFixed && (isEditingName || isCurrentlyEditingThis) && (
            <div className="flex items-center gap-2 flex-grow">
              <GripVertical className="h-5 w-5 text-muted-foreground cursor-grab hidden sm:block shrink-0" />
-             <Input 
-                value={tempName} 
-                onChange={handleNameChange} 
+             <Input
+                value={tempName}
+                onChange={handleNameChange}
                 className="text-sm sm:text-base font-medium flex-grow h-8 sm:h-10"
                 placeholder="Task Name"
                 disabled={isFromWeekly}
              />
            </div>
         )}
-        
+
         <div className="flex items-center shrink-0">
             {!isFixed && !isEditingName && !isCurrentlyEditingThis && !isFromWeekly && (
               <Button variant="ghost" size="icon" onClick={() => { setIsEditingName(true); onEditToggle(task.id); }} className="h-7 w-7 sm:h-8 sm:w-8">
@@ -120,9 +120,9 @@ const RecurringTaskItem = ({ task, onUpdate, onDelete, isFixed, totalHoursType, 
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <div className="relative ml-1">
-                                <Input 
-                                    type="color" 
-                                    value={task.color} 
+                                <Input
+                                    type="color"
+                                    value={task.color}
                                     onChange={handleColorChange}
                                     className="w-6 h-6 sm:w-7 sm:h-7 p-0 border-none cursor-pointer appearance-none rounded-full"
                                     disabled={isFromWeekly}
@@ -154,9 +154,9 @@ const RecurringTaskItem = ({ task, onUpdate, onDelete, isFixed, totalHoursType, 
           thumbClassName="h-4 w-4 sm:h-5 sm:w-5 border-2"
           disabled={isFromWeekly}
         />
-        <Input 
-            type="number" 
-            value={isFromWeekly ? localHours.toFixed(2) : localHours.toString()} 
+        <Input
+            type="number"
+            value={isFromWeekly ? localHours.toFixed(2) : localHours.toString()}
             onChange={handleInputChange}
             onBlur={handleInputBlur}
             min="0"

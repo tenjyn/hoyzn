@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { useToast } from "@/components/ui/use-toast";
-import { v4 as uuidv4 } from 'uuid'; 
+import { v4 as uuidv4 } from 'uuid';
 import { generateRandomColor } from "@/lib/utils";
 
 export function useCategories(projects) {
@@ -24,7 +24,7 @@ export function useCategories(projects) {
 
 
   const handleAddCategory = () => {
-    setSelectedCategory(null); 
+    setSelectedCategory(null);
     setCategoryFormOpen(true);
   };
 
@@ -35,10 +35,10 @@ export function useCategories(projects) {
 
   const handleSaveCategory = (categoryData) => {
     const isNew = !categoryData.id || !categories.some(c => c.id === categoryData.id);
-    
+
     let categoryToSave = { ...categoryData };
     if (isNew) {
-      categoryToSave.id = uuidv4(); 
+      categoryToSave.id = uuidv4();
       categoryToSave.color = categoryToSave.color || generateRandomColor();
     }
 
@@ -56,7 +56,7 @@ export function useCategories(projects) {
       });
     }
     setCategoryFormOpen(false);
-    setSelectedCategory(null); 
+    setSelectedCategory(null);
   };
 
   const handleDeleteCategory = (categoryId) => {

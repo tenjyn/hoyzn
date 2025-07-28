@@ -82,7 +82,7 @@ const DayProfileManager = ({ profiles, setProfiles }) => {
         setEditingProfile(null);
         toast({ title: "Success", description: `Day profile "${profile.name}" saved.` });
     };
-    
+
     const handleDeleteProfile = (profileId) => {
         setProfiles(prev => prev.filter(p => p.id !== profileId));
         toast({ title: "Success", description: "Day profile deleted." });

@@ -4,11 +4,11 @@ import { ProjectCard } from '@/components/ProjectCard';
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
 
-const ProjectGrid = ({ 
-  projects, 
-  categories, 
-  onEditProject, 
-  onDeleteProject, 
+const ProjectGrid = ({
+  projects,
+  categories,
+  onEditProject,
+  onDeleteProject,
   onAddProject,
   onUpdateProjectCompletion
 }) => {

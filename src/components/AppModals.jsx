@@ -39,14 +39,14 @@ const AppModals = ({ projectHookData, categoryHookData, calendarHookData }) => {
         project={selectedProject}
         categories={categories}
       />
-      
+
       <CategoryForm
         open={categoryFormOpen}
         onOpenChange={setCategoryFormOpen}
         onSave={handleSaveCategory}
         category={selectedCategory}
       />
-      
+
       <AnimatePresence>
         {selectedDate && (
           <DayDetail

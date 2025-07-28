@@ -44,13 +44,13 @@ const TimeAllocationChart = ({ data, title, totalCapacity, unassignedTime }) => 
 );
 
 const DashboardPage = () => {
-    const { 
-        projectHookData, 
+    const {
+        projectHookData,
         weeklyTasksHookData,
         dayProfilesHookData,
         dayClassificationsHookData,
     } = useContext(AppContext);
-  
+
     const [selectedDate, setSelectedDate] = useState(new Date());
 
     const { projects } = projectHookData;
@@ -111,7 +111,7 @@ const DashboardPage = () => {
         const dateKey = format(selectedDate, 'yyyy-MM-dd');
         const profileId = dayClassifications[dateKey];
         const selectedDayProfile = dayProfiles.find(p => p.id === profileId);
-        
+
         const dailyTasksForDay = selectedDayProfile ? selectedDayProfile.tasks : [];
         const weeklyTasksAsDaily = weeklyTasks.map(wt => ({...wt, name: `${wt.name} (W)`, hours: wt.hours / 7, isFromWeekly: true }));
         const combinedDailyTasks = [...dailyTasksForDay, ...weeklyTasksAsDaily];
@@ -123,7 +123,7 @@ const DashboardPage = () => {
 
         const daysInMonth = new Date(selectedDate.getFullYear(), selectedDate.getMonth() + 1, 0).getDate();
         const weeksInMonth = daysInMonth / 7;
-        
+
         const avgDailyHours = dayProfiles.length > 0 ? dayProfiles.reduce((sum, p) => sum + p.tasks.reduce((tsum, t) => tsum + t.hours, 0), 0) / dayProfiles.length : 8;
         const monthlyDailyTotal = avgDailyHours * daysInMonth;
         const monthlyWeeklyTotal = weeklyRecurringTotal * weeksInMonth;
@@ -155,7 +155,7 @@ const DashboardPage = () => {
     return (
         <div className="space-y-6 sm:space-y-8">
             <DashboardStats projects={projects} />
-            
+
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <div className="lg:col-span-2 space-y-6">
                     <TimeAllocationChart {...dailyChartData} />

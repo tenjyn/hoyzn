@@ -26,21 +26,21 @@ const PRESET_COLORS = [
 
 const ColorPicker = ({ color, onChange, className }) => {
   const [tempColor, setTempColor] = React.useState(color || "#3b82f6");
-  
+
   const handleColorChange = (e) => {
     setTempColor(e.target.value);
     onChange(e.target.value);
   };
-  
+
   const handlePresetClick = (presetColor) => {
     setTempColor(presetColor);
     onChange(presetColor);
   };
-  
+
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <div 
+        <div
           className={cn(
             "w-10 h-10 rounded-full cursor-pointer border border-input flex items-center justify-center",
             className
@@ -54,19 +54,19 @@ const ColorPicker = ({ color, onChange, className }) => {
             <Label>Color</Label>
             <div className="text-xs text-muted-foreground">{tempColor}</div>
           </div>
-          
-          <div 
+
+          <div
             className="w-full h-24 rounded-md border border-input"
             style={{ backgroundColor: tempColor }}
           />
-          
+
           <input
             type="color"
             value={tempColor}
             onChange={handleColorChange}
             className="w-full h-10"
           />
-          
+
           <div className="grid grid-cols-6 gap-2">
             {PRESET_COLORS.map((presetColor) => (
               <div

@@ -22,7 +22,7 @@ const DashboardStats = ({ projects }) => {
   const totalProjects = projects.length;
   const completedProjects = projects.filter(p => p.status === 'done' || p.completionPercentage === 100).length;
   const upcomingProjectsCount = getUpcomingProjects(projects).length;
-  
+
   const totalEstimatedTimeAllProjects = projects.reduce((sum, p) => sum + (p.initialEstimatedTime || 0), 0);
   const totalTimeRemainingAllProjects = projects.reduce((sum, p) => sum + (p.timeRemaining === null || p.timeRemaining === undefined ? (p.initialEstimatedTime || 0) : p.timeRemaining), 0);
 

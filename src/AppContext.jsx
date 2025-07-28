@@ -17,9 +17,9 @@ export const AppContextProvider = ({ children }) => {
   const dayClassificationsHookData = useDayClassifications();
 
   return (
-    <AppContext.Provider value={{ 
-      projectHookData, 
-      categoryHookData, 
+    <AppContext.Provider value={{
+      projectHookData,
+      categoryHookData,
       calendarHookData,
       weeklyTasksHookData,
       dayProfilesHookData,

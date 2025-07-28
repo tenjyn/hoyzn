@@ -8,9 +8,9 @@ import RecurringTaskItem from './RecurringTaskItem';
 
 export const RecurringTasksManager = ({ tasks, setTasks, type }) => {
   const [newTaskName, setNewTaskName] = useState('');
-  const [editingTaskId, setEditingTaskId] = useState(null); 
+  const [editingTaskId, setEditingTaskId] = useState(null);
 
-  const totalHours = type === 'daily' ? 24 : 168; 
+  const totalHours = type === 'daily' ? 24 : 168;
 
   const handleUpdateTask = (id, updatedTask) => {
     setTasks(prevTasks => prevTasks.map(task => (task.id === id ? updatedTask : task)));
@@ -33,7 +33,7 @@ export const RecurringTasksManager = ({ tasks, setTasks, type }) => {
     setTasks(prevTasks => [...prevTasks, newTask]);
     setNewTaskName('');
   };
-  
+
   const totalAllocatedHours = tasks.reduce((sum, task) => sum + task.hours, 0);
 
   const handleEditToggle = (taskId) => {
@@ -51,7 +51,7 @@ export const RecurringTasksManager = ({ tasks, setTasks, type }) => {
             onUpdate={handleUpdateTask}
             isFixed={true}
             totalHoursType={type}
-            onEditToggle={() => {}} 
+            onEditToggle={() => {}}
             editingTaskId={null}
             />
         ))}

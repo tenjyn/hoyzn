@@ -5,7 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 const AppTabs = () => {
   const location = useLocation();
-  
+
   let activeTab = 'dashboard';
   if (location.pathname.startsWith('/projects')) {
     const queryParams = new URLSearchParams(location.search);

@@ -5,17 +5,17 @@ import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProjectCard } from "@/components/ProjectCard";
 
-const DayDetail = ({ 
-  date, 
-  projects = [], 
-  categories = [], 
+const DayDetail = ({
+  date,
+  projects = [],
+  categories = [],
   onClose,
   onEditProject,
   onDeleteProject,
   onUpdateProjectCompletion
 }) => {
   if (!date) return null;
-  
+
   return (
     <motion.div
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
@@ -37,7 +37,7 @@ const DayDetail = ({
             <X className="h-4 w-4" />
           </Button>
         </div>
-        
+
         <div className="p-4 max-h-[70vh] overflow-y-auto">
           {projects.length > 0 ? (
             <div className="space-y-4">
