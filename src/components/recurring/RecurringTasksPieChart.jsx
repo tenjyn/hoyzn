@@ -8,7 +8,7 @@ const RecurringTasksPieChart = ({ tasks, totalHours }) => {
 
   const chartData = tasks.map(task => ({ name: task.name, value: task.hours, color: task.color }));
   if (freeTime > 0) {
-    chartData.push({ name: 'Free for Projects', value: freeTime, color: '#00C49F' }); 
+    chartData.push({ name: 'Free for Projects', value: freeTime, color: '#00C49F' });
   }
 
   return (
@@ -31,9 +31,9 @@ const RecurringTasksPieChart = ({ tasks, totalHours }) => {
               ))}
             </Pie>
             <RechartsTooltip formatter={(value, name) => [`${value.toFixed(1)}h`, name]} />
-            <Legend 
-              wrapperStyle={{ marginTop: '15px', fontSize: "0.8rem" }} 
-              formatter={(value) => <span className="truncate text-muted-foreground" title={value}>{value}</span>} 
+            <Legend
+              wrapperStyle={{ marginTop: '15px', fontSize: "0.8rem" }}
+              formatter={(value) => <span className="truncate text-muted-foreground" title={value}>{value}</span>}
             />
           </PieChart>
         </ResponsiveContainer>

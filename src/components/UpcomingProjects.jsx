@@ -5,11 +5,11 @@ import { getUpcomingProjects } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
 
-const UpcomingProjects = ({ 
-  projects, 
-  categories, 
-  onEditProject, 
-  onDeleteProject, 
+const UpcomingProjects = ({
+  projects,
+  categories,
+  onEditProject,
+  onDeleteProject,
   onAddProject,
   onUpdateProjectCompletion
 }) => {

@@ -28,9 +28,9 @@ export function useProjects() {
 
   const handleSaveProject = (projectData) => {
     const isNew = !projectData.id || !projects.some(p => p.id === projectData.id);
-    
-    let projectToSave = { 
-      ...projectData, 
+
+    let projectToSave = {
+      ...projectData,
       subTasks: (projectData.subTasks || []).map(st => ({
         id: st.id || uuidv4(),
         title: st.title,
@@ -48,7 +48,7 @@ export function useProjects() {
       projectToSave.initialEstimatedTime = null;
       projectToSave.timeRemaining = null;
     }
-    
+
     projectToSave.completionPercentage = Number(projectToSave.completionPercentage) || 0;
     projectToSave.createdAt = projectToSave.createdAt || new Date().toISOString();
     projectToSave.priority = projectData.priority || 'medium';
@@ -93,7 +93,7 @@ export function useProjects() {
   };
 
   const handleUpdateProjectCompletion = (projectId, completionPercentage) => {
-    setProjects(prevProjects => 
+    setProjects(prevProjects =>
       prevProjects.map(p => {
         if (p.id === projectId) {
           const timeRemaining = calculateTimeRemaining(p.initialEstimatedTime, completionPercentage);
@@ -103,7 +103,7 @@ export function useProjects() {
       })
     );
   };
-  
+
   const handleToggleSubTask = (projectId, subTaskId) => {
     setProjects(prevProjects =>
       prevProjects.map(p => {

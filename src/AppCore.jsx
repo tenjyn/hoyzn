@@ -8,14 +8,14 @@ import { Toaster } from "@/components/ui/toaster";
 import AppRoutes from "@/AppRoutes";
 
 const AppCore = () => {
-  const { 
-    projectHookData, 
-    categoryHookData, 
-    calendarHookData 
+  const {
+    projectHookData,
+    categoryHookData,
+    calendarHookData
   } = useContext(AppContext);
 
   const location = useLocation();
-  
+
   let activeTab = 'dashboard';
   if (location.pathname.startsWith('/projects')) {
     const queryParams = new URLSearchParams(location.search);
@@ -25,28 +25,28 @@ const AppCore = () => {
   }
 
   const isProjectDetailPage = location.pathname.startsWith('/project/');
-  
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       {!isProjectDetailPage && <AppHeader onAddProject={projectHookData.handleAddProject} />}
-      
+
       <main className="container mx-auto px-4 py-8">
         {!isProjectDetailPage && <AppTabs initialTab={activeTab} />}
         <div className={!isProjectDetailPage ? "mt-8" : ""}>
-            <AppRoutes 
+            <AppRoutes
                 projectHookData={projectHookData}
                 categoryHookData={categoryHookData}
                 calendarHookData={calendarHookData}
             />
         </div>
       </main>
-      
+
       <AppModals
         projectHookData={projectHookData}
         categoryHookData={categoryHookData}
         calendarHookData={calendarHookData}
       />
-      
+
       <Toaster />
     </div>
   );

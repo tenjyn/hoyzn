@@ -7,10 +7,10 @@ import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Label } from "@/components/ui/label";
 
-const ProjectCard = ({ 
-  project, 
-  categories = [], 
-  onEdit, 
+const ProjectCard = ({
+  project,
+  categories = [],
+  onEdit,
   onDelete,
   onUpdateCompletion,
   isDetailView = false
@@ -23,11 +23,11 @@ const ProjectCard = ({
   const handleCompletionChange = (value) => {
     onUpdateCompletion(project.id, value[0]);
   };
-  
+
   const displayEstimatedTime = project.timeRemaining ?? project.estimatedTime;
 
   const handleCardClick = (e) => {
-    if (isDetailView) return; 
+    if (isDetailView) return;
     // Prevent navigation if clicking on interactive elements like buttons or slider
     if (e.target.closest('button') || e.target.closest('[role="slider"]')) {
       return;
@@ -62,16 +62,16 @@ const ProjectCard = ({
             </Button>
           </div>
         </div>
-        
+
         {project.description && (
           <p className="text-sm text-muted-foreground mb-3">{project.description}</p>
         )}
-        
+
         <div className="flex flex-wrap gap-2 mb-3">
           {category && (
-            <span 
+            <span
               className="category-pill"
-              style={{ 
+              style={{
                 backgroundColor: categoryColor,
                 color: textColor
               }}
@@ -102,7 +102,7 @@ const ProjectCard = ({
             onClick={(e) => e.stopPropagation()}
           />
         </div>
-        
+
         <div className="flex items-center justify-between text-xs text-muted-foreground">
           {project.dueDate && (
             <div className="flex items-center">
@@ -110,7 +110,7 @@ const ProjectCard = ({
               <span>{formatDate(project.dueDate, 'MMM d, yyyy')}</span>
             </div>
           )}
-          
+
           {(displayEstimatedTime !== null && displayEstimatedTime !== undefined) && (
             <div className="flex items-center">
               <Clock className="h-3 w-3 mr-1" />

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { format } from "date-fns";
-import { 
+import {
   Dialog,
   DialogContent,
   DialogHeader,
@@ -15,7 +15,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Slider } from "@/components/ui/slider";
 import { Checkbox } from "@/components/ui/checkbox";
-import { 
+import {
   Select,
   SelectContent,
   SelectItem,
@@ -30,12 +30,12 @@ const ProjectFormFields = ({ formData, handleChange, handleSelectChange, handleS
       <Label htmlFor="title">Title</Label>
       <Input id="title" name="title" value={formData.title} onChange={handleChange} required />
     </div>
-    
+
     <div className="space-y-2">
       <Label htmlFor="description">Description</Label>
       <Textarea id="description" name="description" value={formData.description} onChange={handleChange} rows={3} />
     </div>
-    
+
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
             <Label htmlFor="priority">Priority</Label>
@@ -73,7 +73,7 @@ const ProjectFormFields = ({ formData, handleChange, handleSelectChange, handleS
         </SelectContent>
       </Select>
     </div>
-    
+
     <div className="grid grid-cols-2 gap-4">
       <div className="space-y-2">
         <Label htmlFor="dueDate">Due Date</Label>
@@ -100,12 +100,12 @@ const ProjectFormFields = ({ formData, handleChange, handleSelectChange, handleS
   </>
 );
 
-const SubTaskForm = ({ 
-    newSubTaskTitle, setNewSubTaskTitle, 
-    newSubTaskDescription, setNewSubTaskDescription, 
-    newSubTaskPriority, setNewSubTaskPriority, 
-    newSubTaskDueDate, setNewSubTaskDueDate, 
-    handleAddOrUpdateSubTask, 
+const SubTaskForm = ({
+    newSubTaskTitle, setNewSubTaskTitle,
+    newSubTaskDescription, setNewSubTaskDescription,
+    newSubTaskPriority, setNewSubTaskPriority,
+    newSubTaskDueDate, setNewSubTaskDueDate,
+    handleAddOrUpdateSubTask,
     editingSubTask, setEditingSubTask,
     resetSubTaskFormFields
 }) => (
@@ -205,7 +205,7 @@ const ProjectForm = ({ open, onOpenChange, onSave, project = null, categories = 
   const [newSubTaskPriority, setNewSubTaskPriority] = useState("medium");
   const [newSubTaskDueDate, setNewSubTaskDueDate] = useState("");
   const [editingSubTask, setEditingSubTask] = useState(null);
-  
+
   const resetSubTaskFormFields = useCallback(() => {
     setNewSubTaskTitle("");
     setNewSubTaskDescription("");
@@ -214,7 +214,7 @@ const ProjectForm = ({ open, onOpenChange, onSave, project = null, categories = 
   }, []);
 
   useEffect(() => {
-    if (open) { 
+    if (open) {
       if (project) {
         setFormData({
           id: project.id,
@@ -237,16 +237,16 @@ const ProjectForm = ({ open, onOpenChange, onSave, project = null, categories = 
           categoryId: categories.length > 0 ? categories[0].id : "",
         });
       }
-      setEditingSubTask(null); 
+      setEditingSubTask(null);
       resetSubTaskFormFields();
     }
   }, [project, categories, open, initialFormData, resetSubTaskFormFields]);
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
-  
+
   const handleSelectChange = (name, value) => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
@@ -257,9 +257,9 @@ const ProjectForm = ({ open, onOpenChange, onSave, project = null, categories = 
 
   const handleAddOrUpdateSubTask = () => {
     if (newSubTaskTitle.trim() === "") return;
-    
-    const subTaskData = { 
-        title: newSubTaskTitle.trim(), 
+
+    const subTaskData = {
+        title: newSubTaskTitle.trim(),
         description: newSubTaskDescription.trim(),
         priority: newSubTaskPriority,
         dueDate: newSubTaskDueDate ? new Date(newSubTaskDueDate).toISOString() : null,
@@ -268,7 +268,7 @@ const ProjectForm = ({ open, onOpenChange, onSave, project = null, categories = 
     if (editingSubTask) {
       setFormData(prev => ({
         ...prev,
-        subTasks: prev.subTasks.map(st => 
+        subTasks: prev.subTasks.map(st =>
           st.id === editingSubTask.id ? { ...st, ...subTaskData } : st
         )
       }));
@@ -293,7 +293,7 @@ const ProjectForm = ({ open, onOpenChange, onSave, project = null, categories = 
   const handleToggleSubTask = (subTaskId) => {
     setFormData(prev => ({
       ...prev,
-      subTasks: prev.subTasks.map(st => 
+      subTasks: prev.subTasks.map(st =>
         st.id === subTaskId ? { ...st, completed: !st.completed } : st
       )
     }));
@@ -309,7 +309,7 @@ const ProjectForm = ({ open, onOpenChange, onSave, project = null, categories = 
       resetSubTaskFormFields();
     }
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const totalEstimatedTime = formData.estimatedTime ? Number(formData.estimatedTime) : null;
@@ -324,7 +324,7 @@ const ProjectForm = ({ open, onOpenChange, onSave, project = null, categories = 
     onSave(formattedData);
     onOpenChange(false);
   };
-  
+
   return (
     <Dialog open={open} onOpenChange={(isOpen) => { onOpenChange(isOpen); if (!isOpen) setEditingSubTask(null); }}>
       <DialogContent className="sm:max-w-lg max-h-[90vh] flex flex-col">
@@ -334,18 +334,18 @@ const ProjectForm = ({ open, onOpenChange, onSave, project = null, categories = 
             {project ? "Update the details of your project." : "Fill in the details for your new project."}
           </DialogDescription>
         </DialogHeader>
-        
+
         <form onSubmit={handleSubmit} id="project-form" className="space-y-4 py-4 overflow-y-auto flex-grow pr-2">
-          <ProjectFormFields 
-            formData={formData} 
-            handleChange={handleChange} 
-            handleSelectChange={handleSelectChange} 
-            handleSliderChange={handleSliderChange} 
-            categories={categories} 
+          <ProjectFormFields
+            formData={formData}
+            handleChange={handleChange}
+            handleSelectChange={handleSelectChange}
+            handleSliderChange={handleSliderChange}
+            categories={categories}
           />
           <div className="space-y-3 border-t pt-4">
             <Label className="text-lg font-medium">Sub-tasks</Label>
-            <SubTaskForm 
+            <SubTaskForm
               newSubTaskTitle={newSubTaskTitle} setNewSubTaskTitle={setNewSubTaskTitle}
               newSubTaskDescription={newSubTaskDescription} setNewSubTaskDescription={setNewSubTaskDescription}
               newSubTaskPriority={newSubTaskPriority} setNewSubTaskPriority={setNewSubTaskPriority}
@@ -354,11 +354,11 @@ const ProjectForm = ({ open, onOpenChange, onSave, project = null, categories = 
               editingSubTask={editingSubTask} setEditingSubTask={setEditingSubTask}
               resetSubTaskFormFields={resetSubTaskFormFields}
             />
-            <SubTaskList 
-              subTasks={formData.subTasks} 
-              handleToggleSubTask={handleToggleSubTask} 
-              handleEditSubTask={handleEditSubTask} 
-              handleDeleteSubTask={handleDeleteSubTask} 
+            <SubTaskList
+              subTasks={formData.subTasks}
+              handleToggleSubTask={handleToggleSubTask}
+              handleEditSubTask={handleEditSubTask}
+              handleDeleteSubTask={handleDeleteSubTask}
             />
           </div>
         </form>

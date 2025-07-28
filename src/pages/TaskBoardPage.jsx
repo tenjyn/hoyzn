@@ -60,7 +60,7 @@ const TaskBoardPage = () => {
   const { categories } = categoryHookData;
   const navigate = useNavigate();
 
-  const categoryMap = useMemo(() => 
+  const categoryMap = useMemo(() =>
     categories.reduce((acc, cat) => {
       acc[cat.id] = cat;
       return acc;
@@ -77,13 +77,13 @@ const TaskBoardPage = () => {
 
   const onDrop = (e, newStatus) => {
     const projectId = e.dataTransfer.getData("projectId");
-    setProjects(prevProjects => 
-      prevProjects.map(p => 
+    setProjects(prevProjects =>
+      prevProjects.map(p =>
         p.id === projectId ? { ...p, status: newStatus } : p
       )
     );
   };
-  
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-6">
@@ -94,30 +94,30 @@ const TaskBoardPage = () => {
         </div>
       </div>
       <div className="flex flex-col md:flex-row gap-4 md:gap-6 w-full overflow-x-auto pb-4">
-        <Column 
-          title="To Do" 
-          status="todo" 
-          projects={projects} 
-          categoryMap={categoryMap} 
-          onDragOver={onDragOver} 
+        <Column
+          title="To Do"
+          status="todo"
+          projects={projects}
+          categoryMap={categoryMap}
+          onDragOver={onDragOver}
           onDrop={onDrop}
           onDragStart={onDragStart}
         />
-        <Column 
-          title="In Progress" 
-          status="inprogress" 
-          projects={projects} 
-          categoryMap={categoryMap} 
-          onDragOver={onDragOver} 
+        <Column
+          title="In Progress"
+          status="inprogress"
+          projects={projects}
+          categoryMap={categoryMap}
+          onDragOver={onDragOver}
           onDrop={onDrop}
           onDragStart={onDragStart}
         />
-        <Column 
-          title="Done" 
-          status="done" 
-          projects={projects} 
-          categoryMap={categoryMap} 
-          onDragOver={onDragOver} 
+        <Column
+          title="Done"
+          status="done"
+          projects={projects}
+          categoryMap={categoryMap}
+          onDragOver={onDragOver}
           onDrop={onDrop}
           onDragStart={onDragStart}
         />

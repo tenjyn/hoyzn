@@ -28,25 +28,25 @@ const PriorityIndicator = ({ priority }) => {
 const ProjectDetailPage = () => {
   const { projectId } = useParams();
   const navigate = useNavigate();
-  
-  const { 
-    projectHookData, 
-    categoryHookData, 
+
+  const {
+    projectHookData,
+    categoryHookData,
     dailyTasksHookData
   } = useContext(AppContext);
 
-  const { 
-    projects, 
-    handleEditProject, 
-    handleDeleteProject, 
+  const {
+    projects,
+    handleEditProject,
+    handleDeleteProject,
     handleToggleSubTask,
   } = projectHookData;
-  
+
   const { categories } = categoryHookData;
   const { dailyTasks } = dailyTasksHookData;
   const nonProjectWorkHours = dailyTasks.reduce((sum, task) => sum + task.hours, 0);
   const projectWorkHoursPerDay = Math.max(0.1, 24 - nonProjectWorkHours);
-  const projectWorkHoursPerMonth = projectWorkHoursPerDay * 20; 
+  const projectWorkHoursPerMonth = projectWorkHoursPerDay * 20;
   const projectWorkHoursPerYear = projectWorkHoursPerMonth * 12;
 
 
@@ -62,7 +62,7 @@ const ProjectDetailPage = () => {
       </div>
     );
   }
-  
+
   const category = categories.find(c => c.id === project.categoryId);
   const categoryColor = category?.color || "#3b82f6";
   const textColor = getContrastColor(categoryColor);
@@ -80,18 +80,18 @@ const ProjectDetailPage = () => {
             </Button>
             <Button variant="destructive" size="sm" onClick={() => {
               handleDeleteProject(project.id);
-              navigate('/'); 
+              navigate('/');
             }}>
               <Trash2 className="h-4 w-4 mr-2" /> Delete Project
             </Button>
         </div>
       </div>
-      
+
       <Card className="overflow-hidden shadow-xl neumorphism-strong">
          <div className="p-6">
             <div className="flex justify-between items-start mb-3">
                 <h2 className="text-3xl font-bold flex items-center">
-                    {project.title} 
+                    {project.title}
                     {project.priority && (
                         <Tooltip>
                             <TooltipTrigger asChild><span className="ml-2"><PriorityIndicator priority={project.priority} /></span></TooltipTrigger>
@@ -100,9 +100,9 @@ const ProjectDetailPage = () => {
                     )}
                 </h2>
                 {category && (
-                    <span 
+                    <span
                     className="px-3 py-1 text-xs font-semibold rounded-full"
-                    style={{ 
+                    style={{
                         backgroundColor: categoryColor,
                         color: textColor
                     }}
@@ -166,8 +166,8 @@ const ProjectDetailPage = () => {
                   className="mt-1"
                 />
                 <div className="flex-grow">
-                  <Label 
-                    htmlFor={`detail-subtask-${subTask.id}`} 
+                  <Label
+                    htmlFor={`detail-subtask-${subTask.id}`}
                     id={`detail-subtask-label-${subTask.id}`}
                     className={`font-medium text-sm cursor-pointer ${subTask.completed ? 'line-through text-muted-foreground' : ''}`}
                   >
@@ -190,11 +190,11 @@ const ProjectDetailPage = () => {
                         </p>
                     )}
                 </div>
-                <Button 
-                  variant="ghost" 
-                  size="icon" 
+                <Button
+                  variant="ghost"
+                  size="icon"
                   className="h-7 w-7"
-                  onClick={() => handleEditProject(project)} 
+                  onClick={() => handleEditProject(project)}
                 >
                   <Edit2 className="h-3 w-3" />
                 </Button>
@@ -204,8 +204,8 @@ const ProjectDetailPage = () => {
         </Card>
       )}
 
-      <TimeAllocationChart 
-        project={project} 
+      <TimeAllocationChart
+        project={project}
         dailyHours={projectWorkHoursPerDay}
         monthlyHours={projectWorkHoursPerMonth}
         yearlyHours={projectWorkHoursPerYear}

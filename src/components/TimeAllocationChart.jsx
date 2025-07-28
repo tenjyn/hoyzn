@@ -16,7 +16,7 @@ const CustomTooltip = ({ active, payload }) => {
 };
 
 const TimeAllocationChart = ({ project, dailyHours = 8, monthlyHours = 160, yearlyHours = 1920 }) => {
-  
+
   const TIME_PERIODS = {
     DAY: { name: `Daily Capacity (${dailyHours}h)`, hours: dailyHours },
     MONTH: { name: `Monthly Capacity (${monthlyHours}h)`, hours: monthlyHours },
@@ -77,9 +77,9 @@ const TimeAllocationChart = ({ project, dailyHours = 8, monthlyHours = 160, year
                   ))}
                 </Pie>
                 <Tooltip content={<CustomTooltip />} />
-                <Legend 
-                  wrapperStyle={{ marginTop: '15px', fontSize: "0.8rem" }} 
-                  formatter={(value) => <span className="text-foreground/80 truncate" title={value}>{value}</span>} 
+                <Legend
+                  wrapperStyle={{ marginTop: '15px', fontSize: "0.8rem" }}
+                  formatter={(value) => <span className="text-foreground/80 truncate" title={value}>{value}</span>}
                 />
               </PieChart>
             </ResponsiveContainer>

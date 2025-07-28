@@ -11,23 +11,23 @@ const AppRoutes = ({ projectHookData, categoryHookData, calendarHookData }) => {
     <Routes>
       <Route path="/" element={<Navigate to="/dashboard" replace />} />
       <Route path="dashboard" element={<DashboardPage />} />
-      <Route 
-        path="projects" 
+      <Route
+        path="projects"
         element={
-          <MainPage 
+          <MainPage
             projectHookData={projectHookData}
             categoryHookData={categoryHookData}
             calendarHookData={calendarHookData}
           />
-        } 
+        }
       />
       <Route path="task-board" element={<TaskBoardPage />} />
       <Route path="settings" element={<SettingsPage />} />
-      <Route 
-        path="/project/:projectId" 
+      <Route
+        path="/project/:projectId"
         element={
           <ProjectDetailPage />
-        } 
+        }
       />
     </Routes>
   );

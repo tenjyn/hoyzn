@@ -13,7 +13,7 @@ const CategoryList = ({ categories, onEditCategory, onDeleteCategory, onAddCateg
           New Category
         </Button>
       </div>
-      
+
       <AnimatePresence>
         {categories.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -29,22 +29,22 @@ const CategoryList = ({ categories, onEditCategory, onDeleteCategory, onAddCateg
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
-                    <div 
-                      className="w-6 h-6 rounded-full" 
+                    <div
+                      className="w-6 h-6 rounded-full"
                       style={{ backgroundColor: category.color }}
                     />
                     <h3 className="font-semibold">{category.name}</h3>
                   </div>
                   <div className="flex space-x-1">
-                    <Button 
-                      variant="ghost" 
+                    <Button
+                      variant="ghost"
                       size="sm"
                       onClick={() => onEditCategory(category)}
                     >
                       Edit
                     </Button>
-                    <Button 
-                      variant="ghost" 
+                    <Button
+                      variant="ghost"
                       size="sm"
                       onClick={() => onDeleteCategory(category.id)}
                     >
