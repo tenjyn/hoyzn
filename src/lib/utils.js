@@ -3,7 +3,7 @@ import { twMerge } from 'tailwind-merge';
 import { format, parseISO, startOfDay, addDays, isWithinInterval, isSameDay } from 'date-fns';
 
 export function cn(...inputs) {
-	return twMerge(clsx(inputs));
+  return twMerge(clsx(...inputs));
 }
 
 export function formatDate(date, formatString = 'PPP') {
@@ -37,19 +37,26 @@ export function generateRandomColor() {
   return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')}`;
 }
 
-export function getUpcomingProjects(projects) {
+export function getUpcomingProjects(projects = []) {
+  if (!Array.isArray(projects)) return [];
+
   const today = startOfDay(new Date());
-  const nextSevenDaysEnd = addDays(today, 6); 
+  const nextSevenDaysEnd = addDays(today, 6);
 
   return projects
     .filter(project => {
-      if (!project.dueDate) return false;
-      const dueDate = startOfDay(typeof project.dueDate === 'string' ? parseISO(project.dueDate) : project.dueDate);
-      return isWithinInterval(dueDate, { start: today, end: nextSevenDaysEnd }) || isSameDay(dueDate, today);
+      if (!project?.dueDate) return false;
+
+      const dueDate = startOfDay(
+        typeof project.dueDate === 'string'
+          ? parseISO(project.dueDate)
+          : project.dueDate
+      );
+
+      return (
+        isWithinInterval(dueDate, { start: today, end: nextSevenDaysEnd }) ||
+        isSameDay(dueDate, today)
+      );
     })
-    .sort((a, b) => {
-      const dateA = new Date(a.dueDate);
-      const dateB = new Date(b.dueDate);
-      return dateA - dateB;
-    });
+    .sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
 }
